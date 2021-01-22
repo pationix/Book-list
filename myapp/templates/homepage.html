@@ -5,8 +5,8 @@
 {% endblock head_title %}
 {% block content %}
     <form method="POST" action="/">
-        Tytuł: {{form.title}}
-        Autor: {{form.author}}
+        Title: {{form.title}}
+        Author: {{form.author}}
         Data Przeczytania: {{form.readed}}
         Opinia: {{form.review}}
         {% csrf_token %}
@@ -23,6 +23,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ book.title }}</h5>
                             <p class="card-text">Author:{{ book.author }}</p>
+                            <a href="{% url 'update_book' book.id %}">Update</a>
                         </div>
                     </div>
                 </div>

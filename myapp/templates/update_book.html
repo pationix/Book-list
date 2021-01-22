@@ -1,0 +1,10 @@
+<h3>Update book</h3>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    Title: {{form.title}}
+    Author: {{form.author}}
+    Data Przeczytania: {{form.readed}}
+    Opinia: {{form.review}}
+    <input type="submit" name="Update book">
+</form>
