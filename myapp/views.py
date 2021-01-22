@@ -1,9 +1,17 @@
-from django.http import HttpResponse
-from .models import Book
-from django.shortcuts import render
+from .models import *
+from .forms import *
+from django.shortcuts import render, redirect
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-    
+def home(request):
+    books = Book.objects.all()
+    print (Book.objects.all())
 
+    form = BookForm()
+    if request.method =='POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
 
+    context = {"books":books, 'form':form}
+    return render(request, "homepage.html", context)
