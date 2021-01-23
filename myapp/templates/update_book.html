@@ -1,10 +1,22 @@
+{%  extends 'base.html' %}
+{% block head_title %}
+    {{ block.super }}
+{% endblock head_title %}
+{% block content %}
 <h3>Update book</h3>
 
-<form method="POST" action="">
+<form method="POST" action="" class="row row-cols-lg-auto g-3 align-items-center">
+    
     {% csrf_token %}
     Title: {{form.title}}
     Author: {{form.author}}
-    Data Przeczytania: {{form.readed}}
-    Opinia: {{form.review}}
-    <input type="submit" name="Update book">
+    Read date: {{form.readed}}
+    Score: {{form.review}}
+    <br>
+    <button submit="button" class="btn btn-primary" name="submit" style="margin: 10px ;">Update book</button>
+    <button submit="button" class="btn btn-secondary" name="Cancel" > 
+        <a href="{% url 'home' %}"> Cancel</a>
+    </button>
+    
 </form>
+{% endblock content %}

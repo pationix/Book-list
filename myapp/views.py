@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 
 def home(request):
     books = Book.objects.all()
-    print (Book.objects.all())
 
     form = BookForm()
     if request.method =='POST':
@@ -30,3 +29,19 @@ def updateBook(request, pk):
     context = {'form':form}
 
     return render(request, 'update_book.html', context)
+
+def deleteBook(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {'book':book}
+
+    if request.method == 'POST':
+        book.delete()
+        return redirect('/')
+
+    return render(request, 'delete_book.html', context)
+
+def previewBook(request, pk):
+    book = Book.objects.get(id=pk)
+    context = {'bookp':book}
+
+    return render(request, 'preview_book.html', context)
