@@ -1,6 +1,8 @@
 from .models import *
 from .forms import *
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
 
 def home(request):
     books = Book.objects.all()
@@ -45,3 +47,19 @@ def previewBook(request, pk):
     context = {'bookp':book}
 
     return render(request, 'preview_book.html', context)
+
+def contactView(request):
+    if request.method == 'GET':
+        formC = ContactForm()
+    else:
+        formC = ContactForm(request.POST)
+        if formC.is_valid():
+            subject = formC.cleaned_data['subject']
+            from_email = formC.cleaned_data['from_email']
+            message = formC.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.123'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('home')
+    return render(request, "email.html", {'formC': formC})

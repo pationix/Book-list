@@ -3,11 +3,12 @@
     {{ block.super }}
 {% endblock head_title %}
 {% block content %}
+
 <h3>Preview:</h3>
-<span>Title: {{book.title}}</spa>
-<p>Author: {{book.author}}</p>
-<p>Readed date: {{book.readed|date:"d-m-Y" }}</p>
-<p>Score: {{book.review}}</p>
+<p>Title: {{bookp.title}}</p>
+<p>Author: {{bookp.author}}</p>
+<p>Readed date: {{bookp.readed|date:"d-m-Y" }}</p>
+<p>Score: {{bookp.review}}</p>
 <button submit="button" class="btn btn-primary" name="Cancel" style="margin: 0 5px ;">
     <a href="{% url 'home' %}"> Back</a>
 </button>
